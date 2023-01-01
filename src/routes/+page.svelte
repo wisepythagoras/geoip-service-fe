@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Counter from './Counter.svelte';
 	import logo from '$lib/images/logo.png';
 	import type { ApiResponseIP, ApiResponseMultiIP, IPRecord } from 'src/types';
 	import InfoTable from './InfoTable.svelte';
+	import Map from './Map.svelte';
 
 	let searchValue = '';
 	let results: IPRecord[] = [];
@@ -44,11 +44,12 @@
 
 <section>
 	{#if results.length > 0}
-		{#if results.length > 1}
-			<div class="info-message">
-				IP addresses associated to your query.
-			</div>
-		{/if}
+		<Map
+			center={[results[0].location.latitude, results[0].location.longitude]}
+			markers={results.map((r) => {
+				return [r.location.latitude, r.location.longitude, r.ip_address]
+			})}
+		/>
 
 		<div class="results-container">
 			{#each results as result}
@@ -114,12 +115,6 @@
 		color: var(--color-text);
 		max-width: 400px;
 		width: 90vw;
-	}
-
-	section > .info-message {
-		text-align: left;
-		width: 100%;
-		padding-bottom: 10px;
 	}
 
 	.search-actions {

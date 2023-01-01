@@ -2,7 +2,6 @@
 	import type { IPRecord } from "src/types";
 
     export let info: IPRecord;
-    console.log(info);
 </script>
 
 <div class="table-container">
