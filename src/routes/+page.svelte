@@ -44,6 +44,19 @@
 
 <section>
 	{#if results.length > 0}
+		<div>
+			<input
+				class="search-input"
+				placeholder="Search IP or domain"
+				on:keydown={(e) => {
+					if (e.key === 'Enter') {
+						query(searchValue);
+					}
+				}}
+				bind:value={searchValue}
+			/>
+		</div>
+
 		<Map
 			center={[results[0].location.latitude, results[0].location.longitude]}
 			markers={results.map((r) => {
