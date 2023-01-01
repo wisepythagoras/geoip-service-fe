@@ -44,7 +44,7 @@
 
 <section>
 	{#if results.length > 0}
-		<div>
+		<div class="inline-search">
 			<input
 				class="search-input"
 				placeholder="Search IP or domain"
@@ -55,14 +55,19 @@
 				}}
 				bind:value={searchValue}
 			/>
+			<div class="search-actions inline">
+				<button on:click={() => query(searchValue)}>Search</button>
+			</div>
 		</div>
 
-		<Map
-			center={[results[0].location.latitude, results[0].location.longitude]}
-			markers={results.map((r) => {
-				return [r.location.latitude, r.location.longitude, r.ip_address]
-			})}
-		/>
+		<div class="map-container">
+			<Map
+				center={[results[0].location.latitude, results[0].location.longitude]}
+				markers={results.map((r) => {
+					return [r.location.latitude, r.location.longitude, r.ip_address]
+				})}
+			/>
+		</div>
 
 		<div class="results-container">
 			{#each results as result}
@@ -135,11 +140,15 @@
 		padding-top: 10px;
 	}
 
+	.search-actions.inline {
+		display: inline-block;
+	}
+
 	.search-actions > button {
 		color: var(--color-text);
 		font-family: var(--heading-font);
 		font-size: 18px;
-		padding: 8px 12px;
+		padding: 6px 12px;
 		background: #171717;
 		border: 1px solid black;
 		border-radius: 5px;
@@ -152,5 +161,14 @@
 
 	.results-container {
 		width: 100%;
+	}
+
+	.inline-search {
+		margin-bottom: 10px;
+	}
+
+	.map-container {
+		width: 100%;
+		margin-bottom: 15px;
 	}
 </style>
