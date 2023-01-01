@@ -44,6 +44,12 @@
 
 <section>
 	{#if results.length > 0}
+		{#if results.length > 1}
+			<div class="info-message">
+				IP addresses associated to your query.
+			</div>
+		{/if}
+
 		<div class="results-container">
 			{#each results as result}
 				<InfoTable info={result} />
@@ -108,6 +114,12 @@
 		color: var(--color-text);
 		max-width: 400px;
 		width: 90vw;
+	}
+
+	section > .info-message {
+		text-align: left;
+		width: 100%;
+		padding-bottom: 10px;
 	}
 
 	.search-actions {
