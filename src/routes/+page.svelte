@@ -1,6 +1,6 @@
 <script lang="ts">
 	import logo from '$lib/images/logo.png';
-	import type { ApiResponseIP, ApiResponseMultiIP, IPRecord } from 'src/types';
+	import type { ApiResponse, IPRecord } from 'src/types';
 	import InfoTable from './InfoTable.svelte';
 	import Map from './Map.svelte';
 
@@ -21,12 +21,12 @@
 		}
 
 		const req = await fetch(endpoint);
-		const json = await req.json();
+		const json = await req.json() as ApiResponse;
 
 		if (!isDomain) {
-			results = [(json as ApiResponseIP).record];
+			results = [json.data as IPRecord];
 		} else {
-			results = (json as ApiResponseMultiIP).records;
+			results = json.data as IPRecord[];
 		}
 	};
 

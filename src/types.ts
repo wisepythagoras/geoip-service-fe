@@ -18,14 +18,8 @@ export type IPRecord = {
     ip_address: string;
 };
 
-export type ApiResponseIP = {
+export type ApiResponse = {
     success: boolean;
     status: string;
-    record: IPRecord;
-};
-
-export type ApiResponseMultiIP = {
-    success: boolean;
-    status: string;
-    records: IPRecord[];
+    data: any;
 };
