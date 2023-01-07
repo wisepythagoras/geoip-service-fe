@@ -6,8 +6,8 @@
 
 	onMount(async () => {
 		const req = await fetch('/api/dns_servers');
-		const json = (await req.json()) as { servers: string[] };
-		dnsServers.set(json.servers);
+		const json = (await req.json()) as { data: string[] };
+		dnsServers.set(json.data);
 	});
 </script>
 
